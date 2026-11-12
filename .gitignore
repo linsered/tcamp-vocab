@@ -1,0 +1,14 @@
+# WorkBuddy 本地项目数据（含记忆与配置，不上传）
+.workbuddy/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# 临时产物
+_*
+*.tmp
+*.log
