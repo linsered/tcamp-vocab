@@ -8,13 +8,9 @@
 
 ## 在线访问
 
-部署到 GitHub Pages 后，地址为：
+**https://linsered.github.io/tcamp-vocab/**
 
-```
-https://YOUR_USERNAME.github.io/tcamp-vocab/
-```
-
-把 `YOUR_USERNAME` 换成你的 GitHub 用户名。没部署之前，直接双击 `index.html` 效果完全一样。
+不想联网的话，直接双击 `index.html` 效果完全一样——它是同一个文件，页面本身完全离线可用。
 
 ---
 
@@ -115,21 +111,21 @@ cp 背单词.html index.html
 
 ---
 
-## 部署到 GitHub Pages
+## 部署状态与更新
 
-1. 在 GitHub 新建一个**公开**仓库，名字 `tcamp-vocab`，不要勾选 README / License / .gitignore（本地已经有了）。
-2. 到 `Settings → SSH and GPG keys` 添加公钥 `~/.ssh/id_ed25519_tcamp.pub`。
-3. 用 Git Bash 在项目目录运行：
+仓库已开启 **GitHub Pages（GitHub Actions）**。`.github/workflows/pages.yml` 会在每次 push 到 `main` 后自动重新发布，通常一分钟内生效。
 
-   ```bash
-   ./push.sh
-   ```
+改完页面后同步入口、提交、推送即可：
 
-   脚本会问你的 GitHub 用户名，然后配好 remote 并推送到 `main`。
-4. 到仓库 `Settings → Pages`，把 **Build and deployment → Source** 选成 **GitHub Actions**。
-5. 如果第一次推送时还没改这个设置，那次 workflow 可能已经跑完了：去 `Actions` 页找到 **Deploy to GitHub Pages**，点一次 **Run workflow**（或 Re-run）即可。之后每次 `git push` 都会自动重新发布，不用再手动操作。
+```bash
+cp 背单词.html index.html
+git add -A && git commit -m "说明这次改了什么"
+git push
+```
 
-> 如果校园网或公司网络拦了 `github.com:443`，本机 `~/.ssh/config` 已把 `github.com` 指到 `ssh.github.com:443`（SSH over HTTPS 端口），推送仍然可以走通。网页访问 GitHub 则需要换网络或开代理。
+`push.sh` 是首次部署用的一键脚本（检查 SSH 认证、同步入口、配置 remote 并推送）；仓库建好之后，日常更新直接 `git push` 就行。
+
+> **本机 hosts 注意**：这台机器的 `hosts` 文件把 `github.com`、`api.github.com` 等域名写死指向 `127.0.0.1`，会让浏览器打不开 GitHub、HTTPS 方式的 git 也连不上。本仓库的 remote 用的是 SSH 地址，配合 `~/.ssh/config` 里的 `ssh.github.com:443` 绕过这个限制。若想在浏览器里正常访问 GitHub，需要自行清理 hosts 中这些 `127.0.0.1` 条目（需要管理员权限）。
 
 ---
 
