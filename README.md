@@ -127,7 +127,7 @@ cp 背单词.html index.html
 
    脚本会问你的 GitHub 用户名，然后配好 remote 并推送到 `main`。
 4. 到仓库 `Settings → Pages`，把 **Build and deployment → Source** 选成 **GitHub Actions**。
-5. 之后每次 `git push`，`pages.yml` 都会自动重新发布，不用再手动操作。
+5. 如果第一次推送时还没改这个设置，那次 workflow 可能已经跑完了：去 `Actions` 页找到 **Deploy to GitHub Pages**，点一次 **Run workflow**（或 Re-run）即可。之后每次 `git push` 都会自动重新发布，不用再手动操作。
 
 > 如果校园网或公司网络拦了 `github.com:443`，本机 `~/.ssh/config` 已把 `github.com` 指到 `ssh.github.com:443`（SSH over HTTPS 端口），推送仍然可以走通。网页访问 GitHub 则需要换网络或开代理。
 
